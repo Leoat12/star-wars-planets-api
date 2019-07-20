@@ -4,6 +4,7 @@ import br.com.leoat.starwarsapi.exception.ResourceNotFoundException;
 import br.com.leoat.starwarsapi.model.Planet;
 import br.com.leoat.starwarsapi.service.PlanetService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ import java.io.IOException;
  */
 @RestController
 @RequestMapping("/planets")
+@Slf4j
 @RequiredArgsConstructor
 public class PlanetController {
 
@@ -51,6 +53,7 @@ public class PlanetController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Planet> findById(@PathVariable Long id) {
+        log.info("Find by planet by id " + id);
         return ResponseEntity.ok(planetService.findById(id).orElseThrow(() -> new ResourceNotFoundException(id)));
     }
 
