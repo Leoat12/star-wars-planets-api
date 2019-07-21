@@ -13,6 +13,7 @@ import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Serviço utilizado para se comunicar com a API de Star Wars (https://swapi.co)
@@ -45,11 +46,7 @@ public class StarwarsApiMovieAppearanceService {
 
             StarwarsApiResponseDTO dto = null;
 
-            if(response.isSuccessful()) {
-                dto = response.body();
-            } else {
-                logger.error(response.errorBody().string());
-            }
+            dto = Optional.ofNullable(response.body()).orElse(null);
 
             if(Objects.nonNull(dto)) {
 
